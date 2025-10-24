@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>10‑Week Training Study — Eligibility & Contact</title>
+  <style>
+    html, body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; padding: 0; background: #0b0c10; color: #f1f5f9; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.6rem; margin: 0 0 12px; }
+    p { line-height: 1.5; }
+    .card { background: #111827; border: 1px solid #1f2937; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .grid { display: grid; gap: 14px; }
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .control { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 10px 12px; color: #e2e8f0; width: 100%; }
+    .hint { color: #94a3b8; font-size: .9rem; }
+    .btn { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 12px; border: 1px solid #334155; background: #1f2937; color: #e2e8f0; font-weight: 700; text-decoration: none; }
+    .btn:hover { filter: brightness(1.08); }
+    .btn.primary { background: #2563eb; border-color: #1d4ed8; color: white; }
+    .btn.group { width: 100%; }
+    .buttons { display: grid; gap: 10px; grid-template-columns: 1fr; }
+    @media (min-width: 520px) { .buttons { grid-template-columns: 1fr 1fr; } }
+    .ok { color: #22c55e; font-weight: 700; }
+    .no { color: #f97316; font-weight: 700; }
+    .footer { color: #94a3b8; font-size: .9rem; margin-top: 10px; }
+    .muted { color: #94a3b8; }
+    .spacer { height: 10px; }
+    .pill { display: inline-block; padding: 2px 10px; border-radius: 999px; background: #0f172a; border: 1px solid #334155; font-size: .85rem; color: #cbd5e1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>10‑Week Training Study</h1>
+    <p class="muted">Quickly check eligibility, then contact us in a single tap.</p>
+    <div class="card grid">
+      <div class="grid">
+        <div>
+          <label>Eligibility criteria</label>
+          <ul class="muted">
+            <li>Age between <strong>18–35</strong></li>
+            <li><strong>Not</strong> engaged in regular lower‑body resistance exercise for &gt; 1&nbsp;year</li>
+            <li><strong>Not vegan</strong></li>
+            <li><strong>No injuries</strong> preventing participation in leg‑press and leg‑extension exercises</li>
+            <li>Have <strong>not</strong> participated in stable isotope studies in the past&nbsp;year</li>
+            <li>Do <strong>not</strong> regularly use tobacco or illicit drugs</li>
+            <li><strong>Not</strong> allergic to nuts</li>
+          </ul>
+        </div>
+        <div class="spacer"></div>
+        <div class="grid">
+          <label for="age">Your age</label>
+          <input id="age" class="control" inputmode="numeric" placeholder="e.g., 24">
+        </div>
+        <div class="grid">
+          <label>Regular lower‑body resistance training &gt; 1 year?</label>
+          <select id="lb_training" class="control">
+            <option value="">Select…</option>
+            <option value="no">No (I have not engaged in regular lower‑body resistance exercise for &gt; 1 year)</option>
+            <option value="yes">Yes (I have engaged in regular lower‑body resistance exercise)</option>
+          </select>
+        </div>
+        <div class="grid">
+          <label>Do you have injuries preventing you from performing leg press and leg extension exercises?</label>
+          <select id="injury" class="control">
+            <option value="">Select…</option>
+            <option value="no">No (I do not have injuries preventing me from performing leg press and leg extension)</option>
+            <option value="yes">Yes (I have injuries preventing me from performing leg press and leg extension)</option>
+          </select>
+        </div>
+        <div class="grid">
+          <label>Have you participated in stable isotope studies in the past year?</label>
+          <select id="isotope" class="control">
+            <option value="">Select…</option>
+            <option value="no">No (I have not participated in stable isotope studies in the past year)</option>
+            <option value="yes">Yes (I have participated in stable isotope studies in the past year)</option>
+          </select>
+        </div>
+        <div class="grid">
+          <label>Do you regularly use tobacco or illicit drugs (e.g., growth hormone, testosterone)?</label>
+          <select id="drugs" class="control">
+            <option value="">Select…</option>
+            <option value="no">No (I do not regularly use tobacco or illicit drugs)</option>
+            <option value="yes">Yes (I regularly use tobacco or illicit drugs)</option>
+          </select>
+        </div>
+        <div class="grid">
+          <label>Dietary pattern / nut allergy</label>
+          <select id="diet" class="control">
+            <option value="">Select…</option>
+            <option value="not_vegan_no_allergy">Not vegan (no nut allergy)</option>
+            <option value="vegan">Vegan</option>
+            <option value="nut_allergy">Not vegan (nut allergy)</option>
+          </select>
+        </div>
+        <div class="grid">
+          <label for="name">Name (optional)</label>
+          <input id="name" class="control" placeholder="Your full name">
+        </div>
+        <div id="elig_msg" class="muted"></div>
+        <div class="buttons" id="compose_block" style="display:none;">
+          <a id="btn_gmail_app" class="btn group">Open in <strong>Gmail app</strong></a>
+          <a id="btn_gmail_web" class="btn group">Open in <strong>Gmail (web)</strong></a>
+          <a id="btn_outlook_app" class="btn group">Open in <strong>Outlook app</strong></a>
+          <a id="btn_outlook_web" class="btn group">Open in <strong>Outlook (web)</strong></a>
+          <a id="btn_mailto" class="btn group">Open in <strong>Default mail app</strong></a>
+        </div>
+        <div id="not_elig_block" class="muted" style="display:none;">
+          <span class="pill">Heads up</span> Based on your answers, you may not meet the study criteria right now. If you think there’s been a mistake or your situation is nuanced, you can still email us with questions.
+          <div class="spacer"></div>
+          <div class="buttons">
+            <a id="btn_mailto_anyway" class="btn">Email us anyway</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        Privacy note: This page doesn’t save or transmit your input. When you tap a button, your device opens your mail app with a prefilled draft you can review before sending.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === CONFIG — you can change these anytime ===
+    const RECIPIENT = "jonathanalejandro.aguilera@mail.utoronto.ca";
+    const SUBJECT   = "Interest in 10‑Week Training Study";
+    // ============================================
+
+    const ageEl = document.getElementById('age');
+    const lbEl  = document.getElementById('lb_training');
+    const dietEl= document.getElementById('diet');
+    const injuryEl= document.getElementById('injury');
+    const isoEl = document.getElementById('isotope');
+    const drugsEl= document.getElementById('drugs');
+    const nameEl= document.getElementById('name');
+    const msgEl = document.getElementById('elig_msg');
+    const composeBlock = document.getElementById('compose_block');
+    const notEligBlock = document.getElementById('not_elig_block');
+
+    const btnGmailApp = document.getElementById('btn_gmail_app');
+    const btnGmailWeb = document.getElementById('btn_gmail_web');
+    const btnOutlookApp = document.getElementById('btn_outlook_app');
+    const btnOutlookWeb = document.getElementById('btn_outlook_web');
+    const btnMailto = document.getElementById('btn_mailto');
+    const btnMailtoAnyway = document.getElementById('btn_mailto_anyway');
+
+    function encodeRFC3986(str) {
+      return encodeURIComponent(str).replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16));
+    }
+
+    function buildBody(eligible) {
+      const nl = "\\r\\n";
+      const name = nameEl.value.trim();
+
+      const lines = [
+        "Hello,",
+        "",
+        "I am interested in participating in the 10‑week training study. Below is how I meet the eligibility criteria.",
+        `Between 18–35: ${eligible ? "[Yes]" : "[No/Unsure]"}`,
+        `I have not engaged in regular lower‑body resistance exercise for > 1 year: ${lbEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
+        `I am not vegan: ${dietEl.value === "not_vegan_no_allergy" ? "[Agree]" : "[Disagree]"}`,
+        `I am not allergic to nuts: ${dietEl.value === "not_vegan_no_allergy" ? "[Agree]" : "[Disagree]"}`,
+        `I do not have injuries preventing me from performing leg press and leg extension: ${injuryEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
+        `I have not participated in stable isotope studies in the past year: ${isoEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
+        `I do not regularly use tobacco or illicit drugs: ${drugsEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
+        "",
+        `Name: ${name}`
+      ];
+      return lines.join(nl);
+    }
+
+    function validate() {
+      const age = parseInt(ageEl.value, 10);
+      const lb  = lbEl.value;
+      const diet= dietEl.value;
+      const injury = injuryEl.value;
+      const iso = isoEl.value;
+      const drugs = drugsEl.value;
+
+      const ageOk = Number.isFinite(age) && age >= 18 && age <= 35;
+      const lbOk  = lb === "no";
+      const dietOk= diet === "not_vegan_no_allergy";
+      const injuryOk = injury === "no";
+      const isoOk = iso === "no";
+      const drugsOk = drugs === "no";
+
+      const eligible = !!(ageOk && lbOk && dietOk && injuryOk && isoOk && drugsOk);
+
+      // Show nothing until all required fields are answered
+      if (!ageEl.value || !lb || !diet || !injury || !iso || !drugs) {
+        msgEl.innerHTML = "<span class='muted'>Answer the questions above to check eligibility.</span>";
+        composeBlock.style.display = "none";
+        notEligBlock.style.display = "none";
+        return;
+      }
+
+      if (eligible) {
+        msgEl.innerHTML = "<span class='ok'>You appear eligible.</span> Tap a button below to email us your details and we’ll reply to arrange an in‑person consent session.";
+        composeBlock.style.display = "grid";
+        notEligBlock.style.display = "none";
+      } else {
+        msgEl.innerHTML = "<span class='no'>You may not be eligible.</span> If you think this is incorrect or have questions, you can still email us.";
+        composeBlock.style.display = "none";
+        notEligBlock.style.display = "block";
+      }
+
+      const body = buildBody(eligible);
+
+      const gmailApp = `googlegmail://co?to=${encodeRFC3986(RECIPIENT)}&subject=${encodeRFC3986(SUBJECT)}&body=${encodeRFC3986(body)}`;
+      const gmailWeb = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeRFC3986(RECIPIENT)}&su=${encodeRFC3986(SUBJECT)}&body=${encodeRFC3986(body)}`;
+      const outlookApp = `ms-outlook://compose?to=${encodeRFC3986(RECIPIENT)}&subject=${encodeRFC3986(SUBJECT)}&body=${encodeRFC3986(body)}`;
+      const outlookWeb = `https://outlook.office.com/mail/deeplink/compose?to=${encodeRFC3986(RECIPIENT)}&subject=${encodeRFC3986(SUBJECT)}&body=${encodeRFC3986(body)}`;
+      const mailto = `mailto:${encodeRFC3986(RECIPIENT)}?subject=${encodeRFC3986(SUBJECT)}&body=${encodeRFC3986(body)}`;
+
+      btnGmailApp.href = gmailApp;
+      btnGmailWeb.href = gmailWeb;
+      btnOutlookApp.href = outlookApp;
+      btnOutlookWeb.href = outlookWeb;
+      btnMailto.href = mailto;
+      btnMailtoAnyway.href = mailto;
+    }
+
+    ['input', 'change'].forEach(evt => {
+      ageEl.addEventListener(evt, validate);
+      lbEl.addEventListener(evt, validate);
+      dietEl.addEventListener(evt, validate);
+      injuryEl.addEventListener(evt, validate);
+      isoEl.addEventListener(evt, validate);
+      drugsEl.addEventListener(evt, validate);
+      nameEl.addEventListener(evt, validate);
+    });
+
+    validate();
+  </script>
+</body>
+</html>
