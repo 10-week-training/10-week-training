@@ -122,7 +122,7 @@
   <script>
     // === CONFIG — you can change these anytime ===
     const RECIPIENT = "jonathanalejandro.aguilera@mail.utoronto.ca";
-    const SUBJECT   = "Interest in 10‑Week Training Study";
+    const SUBJECT   = "10 Week Training Study";
     // ============================================
 
     const ageEl = document.getElementById('age');
@@ -154,16 +154,28 @@
       const lines = [
         "Hello,",
         "",
-        "I am interested in participating in the 10‑week training study. Below is how I meet the eligibility criteria.",
-        `Between 18–35: ${eligible ? "[Yes]" : "[No/Unsure]"}`,
-        `I have not engaged in regular lower‑body resistance exercise for > 1 year: ${lbEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
-        `I am not vegan: ${dietEl.value === "not_vegan_no_allergy" ? "[Agree]" : "[Disagree]"}`,
-        `I am not allergic to nuts: ${dietEl.value === "not_vegan_no_allergy" ? "[Agree]" : "[Disagree]"}`,
-        `I do not have injuries preventing me from performing leg press and leg extension: ${injuryEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
-        `I have not participated in stable isotope studies in the past year: ${isoEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
-        `I do not regularly use tobacco or illicit drugs: ${drugsEl.value === "no" ? "[Agree]" : "[Disagree]"}`,
+        "I am interested in participating in the 10‑week training study.",
         "",
-        `Name: ${name}`
+        "I've reviewed the study requirements and eligibility criteria, and would like to proceed with next steps of booking a consent session to discuss the study with the research team in detail.",
+        "",
+        "Thanks,",
+        `${name}`,
+        "",
+        "Study requirements:",
+        "- 3 lower body training sessions per week",
+        "- Strength and body composition tests",
+        "- Small thigh muscle tissue samples",
+        "- Daily 'heavy water' consumption",
+        "- Blood draw & saliva samples",
+        "",
+        "Study eligibility criteria:",
+        "- Age between 18–35",
+        "- Not engaged in regular lower‑body resistance exercise for > 1 year",
+        "- Not vegan",
+        "- No injuries preventing leg‑press and leg‑extension exercises",
+        "- Have not participated in stable isotope studies in the past year",
+        "- Do not regularly use tobacco or illicit drugs",
+        "- Not allergic to nuts"
       ];
       return lines.join(nl);
     }
@@ -216,7 +228,9 @@
       btnOutlookApp.href = outlookApp;
       btnOutlookWeb.href = outlookWeb;
       btnMailto.href = mailto;
-      btnMailtoAnyway.href = mailto;
+      // Provide a simple mailto for those emailing us anyway (no template)
+      const mailtoSimple = `mailto:${encodeRFC3986(RECIPIENT)}?subject=${encodeRFC3986(SUBJECT)}`;
+      btnMailtoAnyway.href = mailtoSimple;
     }
 
     ['input', 'change'].forEach(evt => {
