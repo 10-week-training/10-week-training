@@ -231,7 +231,7 @@
       btnOutlookWeb.href = outlookWeb;
       btnMailto.href = mailto;
       // Provide a simple mailto for those emailing us anyway (no template)
-      const mailtoSimple = `mailto:${encodeRFC3986(RECIPIENT)}?subject=${encodeRFC3986(SUBJECT)}`;
+      const mailtoSimple = `mailto:${encodeRFC3986(RECIPIENT)}?subject=${encodeRFC3986("Eligibility Inquiry for 10 Week Training Study")}`;
       btnMailtoAnyway.href = mailtoSimple;
     }
 
