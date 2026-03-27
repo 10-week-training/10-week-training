@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>10‑Week Training Study — Eligibility Screening</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    html, body {
+      font-family: 'DM Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #0b0c10;
+      color: #f1f5f9;
+    }
+
+    .wrap { max-width: 720px; margin: 0 auto; padding: 28px 20px; }
+
+    h1 { font-size: 1.65rem; margin: 0 0 6px; font-weight: 700; letter-spacing: -0.02em; }
+
+    p { line-height: 1.55; }
+
+    .subtitle { color: #94a3b8; margin: 0 0 20px; font-size: 1rem; }
+
+    .card {
+      background: #111827;
+      border: 1px solid #1e293b;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    }
+
+    .grid { display: grid; gap: 16px; }
+
+    label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem; }
+
+    .control {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: #e2e8f0;
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .control:focus { outline: none; border-color: #3b82f6; }
+
+    .hint { color: #94a3b8; font-size: .88rem; line-height: 1.5; }
+
+    ul.criteria { padding-left: 18px; margin: 6px 0 0; }
+    ul.criteria li { color: #94a3b8; line-height: 1.6; font-size: 0.92rem; }
+    ul.criteria li strong { color: #cbd5e1; }
+
+    .divider { border: none; border-top: 1px solid #1e293b; margin: 8px 0; }
+
+    /* Status messages */
+    .msg-eligible {
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 12px;
+      padding: 16px 18px;
+      line-height: 1.5;
+    }
+    .msg-eligible strong { color: #4ade80; }
+
+    .msg-capacity, .msg-ineligible {
+      background: rgba(249,115,22,0.07);
+      border: 1px solid rgba(249,115,22,0.2);
+      border-radius: 12px;
+      padding: 16px 18px;
+      line-height: 1.5;
+      color: #e2e8f0;
+    }
+    .msg-capacity strong, .msg-ineligible strong { color: #fb923c; }
+
+    .msg-waiting {
+      color: #94a3b8;
+      font-size: 0.93rem;
+    }
+
+    /* Calendly button */
+    .btn-calendly {
+      display: inline-block;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 12px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      font-family: inherit;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .btn-calendly:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .btn-calendly:active { transform: translateY(0); }
+
+    .footer {
+      color: #64748b;
+      font-size: .82rem;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* Smooth reveal */
+    .section { transition: opacity 0.3s ease, max-height 0.4s ease; }
+    .section.hidden { opacity: 0; max-height: 0; overflow: hidden; pointer-events: none; margin: 0; padding: 0; }
+    .section.visible { opacity: 1; max-height: 2000px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>10‑Week Training Study</h1>
+    <p class="subtitle">Check your eligibility and book a consent session.</p>
+
+    <div class="card grid">
+
+      <!-- ============ STEP 1: SEX ============ -->
+      <div id="step_sex" class="grid">
+        <div>
+          <label for="sex">Biological sex</label>
+          <select id="sex" class="control">
+            <option value="">Select…</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div id="sex_msg"></div>
+      </div>
+
+      <!-- ============ STEP 2: ELIGIBILITY (hidden until sex passes) ============ -->
+      <div id="step_eligibility" class="section hidden">
+        <div class="grid">
+          <hr class="divider">
+
+          <div>
+            <label>Eligibility criteria</label>
+            <ul class="criteria">
+              <li>Age between <strong>18–35</strong></li>
+              <li><strong>Not</strong> engaged in regular lower‑body resistance exercise for &gt; 1&nbsp;year</li>
+              <li><strong>Not vegan</strong></li>
+              <li><strong>No injuries</strong> preventing participation in leg‑press and leg‑extension exercises</li>
+              <li>Have <strong>not</strong> participated in stable isotope studies in the past&nbsp;year</li>
+              <li>Do <strong>not</strong> regularly use tobacco or illicit drugs</li>
+              <li><strong>Not</strong> allergic to nuts</li>
+            </ul>
+          </div>
+
+          <div>
+            <label for="age">Your age</label>
+            <input id="age" class="control" inputmode="numeric" placeholder="e.g., 24">
+          </div>
+
+          <div>
+            <label for="lb_training">Regular lower‑body resistance training &gt; 1 year?</label>
+            <select id="lb_training" class="control">
+              <option value="">Select…</option>
+              <option value="no">No (I have not engaged in regular lower‑body resistance exercise for &gt; 1 year)</option>
+              <option value="yes">Yes (I have engaged in regular lower‑body resistance exercise)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="injury">Do you have injuries preventing you from performing leg press and leg extension exercises?</label>
+            <select id="injury" class="control">
+              <option value="">Select…</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="isotope">Have you participated in stable isotope studies in the past year?</label>
+            <select id="isotope" class="control">
+              <option value="">Select…</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="drugs">Do you regularly use tobacco or illicit drugs (e.g., growth hormone, testosterone)?</label>
+            <select id="drugs" class="control">
+              <option value="">Select…</option>
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="diet">Dietary pattern / nut allergy</label>
+            <select id="diet" class="control">
+              <option value="">Select…</option>
+              <option value="not_vegan_no_allergy">Not vegan, no nut allergy</option>
+              <option value="vegan">Vegan</option>
+              <option value="nut_allergy">Not vegan, but allergic to nuts</option>
+            </select>
+          </div>
+
+          <!-- Result -->
+          <div id="elig_msg"></div>
+
+          <!-- Calendly button (shown only when eligible) -->
+          <div id="calendly_block" class="section hidden">
+            <a id="btn_calendly" class="btn-calendly" href="https://calendly.com/jonathanalejandro-aguilera-mail/consent-session" target="_blank" rel="noopener">
+              Book your consent session →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        Privacy: this page does not save or transmit any of your responses.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =====================================================
+    //  RECRUITMENT FLAGS — flip to false when a sex is full
+    // =====================================================
+    const RECRUITING_MALES   = true;
+    const RECRUITING_FEMALES = true;
+    // =====================================================
+
+    const CALENDLY_URL = "https://calendly.com/jonathanalejandro-aguilera-mail/consent-session";
+
+    // Elements
+    const sexEl     = document.getElementById('sex');
+    const sexMsg    = document.getElementById('sex_msg');
+    const stepElig  = document.getElementById('step_eligibility');
+    const ageEl     = document.getElementById('age');
+    const lbEl      = document.getElementById('lb_training');
+    const injuryEl  = document.getElementById('injury');
+    const isoEl     = document.getElementById('isotope');
+    const drugsEl   = document.getElementById('drugs');
+    const dietEl    = document.getElementById('diet');
+    const eligMsg   = document.getElementById('elig_msg');
+    const calBlock  = document.getElementById('calendly_block');
+    const calBtn    = document.getElementById('btn_calendly');
+
+    calBtn.href = CALENDLY_URL;
+
+    // --- Sex gate ---
+    function checkSex() {
+      const sex = sexEl.value;
+      if (!sex) {
+        sexMsg.innerHTML = '';
+        stepElig.classList.add('hidden');
+        stepElig.classList.remove('visible');
+        return;
+      }
+
+      const needed = (sex === 'male' && RECRUITING_MALES) || (sex === 'female' && RECRUITING_FEMALES);
+
+      if (needed) {
+        sexMsg.innerHTML = '';
+        stepElig.classList.remove('hidden');
+        stepElig.classList.add('visible');
+      } else {
+        const label = sex === 'male' ? 'male' : 'female';
+        sexMsg.innerHTML =
+          `<div class="msg-capacity"><strong>Recruitment for ${label} participants has reached capacity.</strong><br>Thank you for your interest in the study — we appreciate it.</div>`;
+        stepElig.classList.add('hidden');
+        stepElig.classList.remove('visible');
+        // Reset eligibility fields
+        resetEligibility();
+      }
+    }
+
+    function resetEligibility() {
+      ageEl.value = '';
+      lbEl.value = '';
+      injuryEl.value = '';
+      isoEl.value = '';
+      drugsEl.value = '';
+      dietEl.value = '';
+      eligMsg.innerHTML = '';
+      calBlock.classList.add('hidden');
+      calBlock.classList.remove('visible');
+    }
+
+    // --- Eligibility check ---
+    function checkEligibility() {
+      const age    = parseInt(ageEl.value, 10);
+      const lb     = lbEl.value;
+      const injury = injuryEl.value;
+      const iso    = isoEl.value;
+      const drugs  = drugsEl.value;
+      const diet   = dietEl.value;
+
+      // Wait until all fields are answered
+      if (!ageEl.value || !lb || !injury || !iso || !drugs || !diet) {
+        eligMsg.innerHTML = '<span class="msg-waiting">Answer all questions above to check eligibility.</span>';
+        calBlock.classList.add('hidden');
+        calBlock.classList.remove('visible');
+        return;
+      }
+
+      const ageOk    = Number.isFinite(age) && age >= 18 && age <= 35;
+      const lbOk     = lb === 'no';
+      const injuryOk = injury === 'no';
+      const isoOk    = iso === 'no';
+      const drugsOk  = drugs === 'no';
+      const dietOk   = diet === 'not_vegan_no_allergy';
+
+      const eligible = ageOk && lbOk && injuryOk && isoOk && drugsOk && dietOk;
+
+      if (eligible) {
+        eligMsg.innerHTML =
+          `<div class="msg-eligible"><strong>You appear eligible!</strong><br>Use the button below to book a 45‑minute in‑person consent session with the research team.</div>`;
+        calBlock.classList.remove('hidden');
+        calBlock.classList.add('visible');
+      } else {
+        eligMsg.innerHTML =
+          `<div class="msg-ineligible"><strong>Based on your answers, you may not meet the study criteria at this time.</strong><br>If you think there's been a mistake or your situation is nuanced, feel free to reach out to us at <a href="mailto:jonathanalejandro.aguilera@mail.utoronto.ca" style="color:#60a5fa;">jonathanalejandro.aguilera@mail.utoronto.ca</a>.</div>`;
+        calBlock.classList.add('hidden');
+        calBlock.classList.remove('visible');
+      }
+    }
+
+    // --- Event listeners ---
+    sexEl.addEventListener('change', checkSex);
+
+    ['input', 'change'].forEach(evt => {
+      ageEl.addEventListener(evt, checkEligibility);
+      lbEl.addEventListener(evt, checkEligibility);
+      injuryEl.addEventListener(evt, checkEligibility);
+      isoEl.addEventListener(evt, checkEligibility);
+      drugsEl.addEventListener(evt, checkEligibility);
+      dietEl.addEventListener(evt, checkEligibility);
+    });
+  </script>
+</body>
+</html>
