@@ -203,6 +203,15 @@
             </select>
           </div>
 
+          <div>
+            <label for="availability">Are you available to train 3 times per week for 10 uninterrupted weeks starting sometime in April?</label>
+            <select id="availability" class="control">
+              <option value="">Select…</option>
+              <option value="yes">Yes — I have no extended absences (e.g., week‑long trips) planned until at least July</option>
+              <option value="no">No — I have travel or other commitments that would interrupt the 10‑week block</option>
+            </select>
+          </div>
+
           <!-- Result -->
           <div id="elig_msg"></div>
 
@@ -241,6 +250,7 @@
     const isoEl     = document.getElementById('isotope');
     const drugsEl   = document.getElementById('drugs');
     const dietEl    = document.getElementById('diet');
+    const availEl   = document.getElementById('availability');
     const eligMsg   = document.getElementById('elig_msg');
     const calBlock  = document.getElementById('calendly_block');
     const calBtn    = document.getElementById('btn_calendly');
@@ -269,7 +279,6 @@
           `<div class="msg-capacity"><strong>Recruitment for ${label} participants has reached capacity.</strong><br>Thank you for your interest in the study — we appreciate it.</div>`;
         stepElig.classList.add('hidden');
         stepElig.classList.remove('visible');
-        // Reset eligibility fields
         resetEligibility();
       }
     }
@@ -281,6 +290,7 @@
       isoEl.value = '';
       drugsEl.value = '';
       dietEl.value = '';
+      availEl.value = '';
       eligMsg.innerHTML = '';
       calBlock.classList.add('hidden');
       calBlock.classList.remove('visible');
@@ -294,9 +304,10 @@
       const iso    = isoEl.value;
       const drugs  = drugsEl.value;
       const diet   = dietEl.value;
+      const avail  = availEl.value;
 
       // Wait until all fields are answered
-      if (!ageEl.value || !lb || !injury || !iso || !drugs || !diet) {
+      if (!ageEl.value || !lb || !injury || !iso || !drugs || !diet || !avail) {
         eligMsg.innerHTML = '<span class="msg-waiting">Answer all questions above to check eligibility.</span>';
         calBlock.classList.add('hidden');
         calBlock.classList.remove('visible');
@@ -309,8 +320,9 @@
       const isoOk    = iso === 'no';
       const drugsOk  = drugs === 'no';
       const dietOk   = diet === 'not_vegan_no_allergy';
+      const availOk  = avail === 'yes';
 
-      const eligible = ageOk && lbOk && injuryOk && isoOk && drugsOk && dietOk;
+      const eligible = ageOk && lbOk && injuryOk && isoOk && drugsOk && dietOk && availOk;
 
       if (eligible) {
         eligMsg.innerHTML =
@@ -335,6 +347,7 @@
       isoEl.addEventListener(evt, checkEligibility);
       drugsEl.addEventListener(evt, checkEligibility);
       dietEl.addEventListener(evt, checkEligibility);
+      availEl.addEventListener(evt, checkEligibility);
     });
   </script>
 </body>
