@@ -274,9 +274,17 @@
         stepElig.classList.remove('hidden');
         stepElig.classList.add('visible');
       } else {
-        const label = sex === 'male' ? 'male' : 'female';
-        sexMsg.innerHTML =
-          `<div class="msg-capacity"><strong>Recruitment for ${label} participants has reached capacity.</strong><br>Thank you for your interest in the study — we appreciate it.</div>`;
+        const filledLabel = sex === 'male' ? 'male' : 'female';
+        const otherNeeded = (sex === 'male' && RECRUITING_FEMALES) || (sex === 'female' && RECRUITING_MALES);
+        const otherLabel  = sex === 'male' ? 'female' : 'male';
+
+        let msg = `<div class="msg-capacity"><strong>We've filled all available spots for ${filledLabel} participants in this round of recruitment.</strong><br>`;
+        if (otherNeeded) {
+          msg += `We are still recruiting ${otherLabel} participants. `;
+        }
+        msg += `Thank you for your interest in the study — we appreciate it.</div>`;
+
+        sexMsg.innerHTML = msg;
         stepElig.classList.add('hidden');
         stepElig.classList.remove('visible');
         resetEligibility();
